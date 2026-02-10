@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decidir com clareza</title>
+
+<meta name="description" content="Entenda um caminho seguro para sair do aluguel sem financiamento e sem juros.">
+
+<!-- META PIXEL -->
+<script>
+!function(f,b,e,v,n,t,s){
+if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)
+}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', 'SEU_PIXEL_ID'); // 🔴 TROQUE PELO ID REAL
+fbq('track', 'PageView');
+</script>
+
+<style>
+:root{
+  --bg:#0b0b0b;
+  --bg2:#151515;
+  --red:#b71c1c;
+  --gray:#cfcfcf;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),var(--bg2));
+  color:#fff;
+  overflow-x:hidden;
+}
+.container{
+  max-width:960px;
+  margin:auto;
+  padding:48px 20px;
+}
+.hero{text-align:center}
+.hero h1{
+  font-size:2.6rem;
+  letter-spacing:-.5px;
+}
+.hero p{
+  color:var(--gray);
+  max-width:720px;
+  margin:16px auto 0;
+  font-size:1.1rem;
+}
+.video-box{
+  margin:48px auto 24px;
+  position:relative;
+  padding-top:56.25%;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 40px 90px rgba(0,0,0,.7);
+}
+.video-box iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:none;
+}
+
+/* PROGRESS BAR */
+.progress-svg-wrap{
+  width:100%;
+  margin:22px auto 8px;
+}
+.glow{
+  filter:drop-shadow(0 0 6px rgba(183,28,28,.6));
+}
+
+.authority{
+  font-size:.85rem;
+  color:#888;
+  margin-top:10px;
+}
+
+.cta{margin-top:36px}
+.cta button{
+  background:linear-gradient(135deg,#8e0000,var(--red));
+  border:none;
+  padding:18px 40px;
+  border-radius:12px;
+  font-size:1.05rem;
+  font-weight:600;
+  color:#fff;
+  opacity:.35;
+  cursor:not-allowed;
+  transition:.4s;
+}
+.cta button.enabled{
+  opacity:1;
+  cursor:pointer;
+  box-shadow:0 25px 50px rgba(183,28,28,.35);
+  animation:pulse 1.8s infinite;
+}
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.04)}
+  100%{transform:scale(1)}
+}
+.cta span{
+  display:block;
+  margin-top:12px;
+  font-size:.85rem;
+  color:#999;
+}
+
+.alert{
+  border-left:4px solid var(--red);
+  padding-left:24px;
+  margin-top:80px;
+}
+footer{
+  text-align:center;
+  color:#777;
+  font-size:.8rem;
+  margin-top:120px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<section class="hero">
+  <h1>Você não precisa de financiamento para sair do aluguel.</h1>
+  <p>Assista com atenção antes de decidir.</p>
+
+  <div class="video-box">
+  <iframe
+    id="player"
+    src="https://www.youtube.com/embed/yULqK_zSh0k?enablejsapi=1&rel=0&playsinline=1"
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+  </iframe>
+</div>
+
+  <div class="progress-svg-wrap">
+    <svg width="100%" height="8" viewBox="0 0 1000 8" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="grad">
+          <stop offset="0%" stop-color="#7f0000"/>
+          <stop offset="100%" stop-color="#b71c1c"/>
+        </linearGradient>
+      </defs>
+      <rect width="1000" height="8" rx="4" fill="#222"/>
+      <rect id="progressBar" width="0" height="8" rx="4" fill="url(#grad)"/>
+    </svg>
+  </div>
+
+  <div class="authority">
+    Método operado pela maior administradora independente do Brasil
+  </div>
+
+  <div class="cta">
+    <button id="ctaBtn" disabled>Quero decidir com clareza</button>
+    <span id="ctaText">Assista para liberar o próximo passo</span>
+  </div>
+</section>
+
+<section class="alert">
+  <p>Isso não é promessa nem proposta comercial. É uma análise de cenário.</p>
+</section>
+
+<footer>
+  © 2026 – Conteúdo educativo. Nenhuma promessa de resultado financeiro.
+</footer>
+
+</div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+let player;
+let metaTracked=false;
+
+document.body.style.overflowY='hidden';
+
+function onYouTubeIframeAPIReady(){
+  player=new YT.Player('player',{
+    events:{ onStateChange:onPlayerStateChange }
+  });
+}
+
+function onPlayerStateChange(event){
+  if(event.data===YT.PlayerState.PLAYING){
+    trackProgress();
+  }
+}
+
+function trackProgress(){
+  const bar=document.getElementById('progressBar');
+  const btn=document.getElementById('ctaBtn');
+  const text=document.getElementById('ctaText');
+
+  const interval=setInterval(()=>{
+    const duration=player.getDuration();
+    if(duration <= 0) return;
+
+    const current=player.getCurrentTime();
+    const percent=(current/duration)*100;
+    const width=Math.min(percent*10,1000);
+
+    bar.setAttribute('width',width);
+
+    if(percent>=70){
+      document.body.style.overflowY='auto';
+    }
+
+    if(percent>=85){
+      bar.classList.add('glow');
+      text.innerText='Quase lá';
+    }
+
+    if(percent>=90){
+      btn.classList.add('enabled');
+      btn.disabled=false;
+      text.innerText='Você pode seguir com clareza';
+
+      if(!metaTracked){
+        fbq('trackCustom','Video90Percent');
+        metaTracked=true;
+      }
+
+      btn.onclick=()=>{
+        window.location.href='https://calendly.com/mikediasademicon/conversa';
+      };
+
+      clearInterval(interval);
+    }
+  },800);
+}
+</script>
+
+</body>
+</html>
